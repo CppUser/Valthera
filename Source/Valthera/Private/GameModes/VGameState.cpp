@@ -4,9 +4,15 @@
 #include "GameModes/VGameState.h"
 
 #include "Components/GameFrameworkComponentManager.h"
+#include "GameModes/Experience/VExperienceManagerComponent.h"
 
 AVGameState::AVGameState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	ExperienceManagerComponent = ObjectInitializer.CreateDefaultSubobject<UVExperienceManagerComponent>(this,TEXT("ExperienceManagerComponent"));
+
 }
 
 void AVGameState::PreInitializeComponents()

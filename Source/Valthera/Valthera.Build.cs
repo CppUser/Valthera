@@ -25,6 +25,7 @@ public class Valthera : ModuleRules
 			"GameplayTags",
 			"AIModule",
 			"NavigationSystem",
+			"NetCore"
 		});
 
 		if (Target.bBuildEditor)

@@ -3,6 +3,9 @@
 
 #include "System/VGameInstance.h"
 
+#include "Components/GameFrameworkComponentManager.h"
+#include "Utils/VGameplayTags.h"
+
 UVGameInstance::UVGameInstance(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 }
@@ -10,6 +13,16 @@ UVGameInstance::UVGameInstance(const FObjectInitializer& ObjectInitializer) : Su
 void UVGameInstance::Init()
 {
 	Super::Init();
+	UGameFrameworkComponentManager* ComponentManager = GetSubsystem<UGameFrameworkComponentManager>(this);
+
+	if (ensure(ComponentManager))
+	{
+		ComponentManager->RegisterInitState(VGameplayTags::InitState_Spawned, false, FGameplayTag());
+		ComponentManager->RegisterInitState(VGameplayTags::InitState_DataAvailable, false, VGameplayTags::InitState_Spawned);
+		ComponentManager->RegisterInitState(VGameplayTags::InitState_DataInitialized, false, VGameplayTags::InitState_DataAvailable);
+		ComponentManager->RegisterInitState(VGameplayTags::InitState_GameplayReady, false, VGameplayTags::InitState_DataInitialized);
+	}
+	
 }
 
 void UVGameInstance::Shutdown()

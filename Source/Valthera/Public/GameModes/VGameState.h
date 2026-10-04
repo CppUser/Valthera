@@ -6,6 +6,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "VGameState.generated.h"
 
+class UVExperienceManagerComponent;
 /**
  * 
  */
@@ -20,4 +21,8 @@ protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+private:
+	UPROPERTY()
+	TObjectPtr<UVExperienceManagerComponent> ExperienceManagerComponent;
 };
